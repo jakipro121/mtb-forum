@@ -1,0 +1,52 @@
+.title h1 {
+  color: var(--text);
+  text-align: center;
+  font-size: xx-large;
+  margin: 60px;
+}
+
+.title h1 span {
+  color: var(--secondary);
+}
+
+.hero {
+  justify-content: space-evenly;
+  display: flex;
+}
+
+.hero a {
+  font-size: larger;
+  background-color: var(--primary);
+  padding: 50px;
+  align-self: center;
+  border-radius: 10px;
+  border-color: var(--accent);
+  border-style: solid;
+  border-width: 5px;
+  transition: all 0.2s;
+}
+
+.hero a div {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("/money.jpg");
+  border-radius: 10px;
+}
+
+.pitanje {
+  color: var(--accent);
+}
+
+.hero span {
+  color: var(--secondary);
+}
+
+.flip {
+  transform: scaleX(-1);
+}
+
+.hero a:hover {
+  background-color: var(--accent);
+  padding-top: 50px;
+  padding-bottom: 30px;
+  border-radius: 50px;
+}

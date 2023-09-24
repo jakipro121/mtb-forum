@@ -1,0 +1,54 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: var(--primary);
+}
+
+.logo a {
+  display: flex;
+}
+.logo img {
+  align-self: center;
+  transition: all 1s ease-in-out;
+  width: max-content;
+}
+
+.logo:hover img {
+  rotate: 360deg;
+}
+
+.logo p {
+  padding: 5px;
+  color: var(--text);
+}
+
+.left {
+  margin-left: 10%;
+}
+
+.right {
+  align-self: center;
+  float: right;
+  margin-right: 10%;
+}
+
+.link {
+  margin: 7px;
+  color: var(--text);
+  border-radius: 5px;
+  border-color: var(--secondary);
+  border-width: 2px;
+  border-style: solid;
+  padding: 7px;
+  background-color: var(--background);
+  transition: all 0.2s;
+}
+
+.link:hover {
+  margin: 4px;
+  padding: 10px;
+  color: var(--text);
+  border-color: var(--accent);
+  background-color: var(--primary);
+}

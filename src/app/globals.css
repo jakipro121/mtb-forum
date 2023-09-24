@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --text: #fafdff;
+  --background: #121212;
+  --primary: #991a1a;
+  --secondary: #681000;
+  --accent: #f77001;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  user-select: none;
+  color: var(--text);
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("/mtbBackground.jpg");
+  background-attachment: fixed;
+  background-position-x: 80%;
+  background-size: cover;
+}

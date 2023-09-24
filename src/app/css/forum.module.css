@@ -1,0 +1,52 @@
+
+/*sidebar*/
+.sidebar{
+    display: block;
+    background-color: var(--primary);
+    padding: 2rem;
+    float: left ;
+    border-width: 1px;
+}
+
+.sidebar a{
+    border-bottom-width: 1px;
+    padding: 10px;
+    display: block;
+}
+
+.sidebar a:hover{
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+/*dropdown*/
+.dropdown {
+    background-color: var(--secondary);
+    margin-left: 20px;
+    display: block;
+    overflow: hidden;
+    transition: all 0.4s;
+    max-height: 0px;
+}
+
+.dropdown a{
+    border-bottom-width: 1px;
+}
+
+.dropdown:hover {
+    max-height: 500px;
+    transition: all 0.4s;
+}
+
+.sidebar *:hover + div{
+    max-height: 500px;
+    transition: all 0.4s;
+}
+/*---dropdown---*/
+/*---sidebar---*/
+
+.main {
+    background-color: var(--background);
+    padding: 2rem;
+    width: 100%;
+    border-width: 1px;
+}
