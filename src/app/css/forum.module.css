@@ -4,7 +4,6 @@
     display: block;
     background-color: var(--primary);
     padding: 2rem;
-    float: left ;
     border-width: 1px;
 }
 
@@ -45,8 +44,49 @@
 /*---sidebar---*/
 
 .main {
-    background-color: var(--background);
+    height: 100%;
+    display: block;
+    background-color: var(--secondary);
     padding: 2rem;
     width: 100%;
     border-width: 1px;
+}
+
+.main textarea{
+    width: 30%;
+    transition: width 0.4s;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 5px;
+    margin: 1rem 0px;
+    border-color: var(--accent);
+    border-width: 2px;
+    border-radius: 5px;
+    resize: none;
+}
+
+.main > div:nth-of-type(1){
+
+    display: block;
+    border-width: 1px;
+    padding: 10px;
+    transition: all 0.4s;
+}
+
+.main textarea:focus{
+    
+    width: 80%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.main button{
+    display: block;
+    height: 0px;
+    opacity: 0;
+    transition: all 0.4s;
+}
+
+.main textarea:focus~button{
+    height: 30px;
+    opacity: 1;
 }
