@@ -14,6 +14,7 @@ const config = {
 const client = new Client(config);
 await client.connect();
 
+/*
 export async function POST(req, res) {
   const session = await getServerSession(authOptions);
   const token = await getToken({ req });
@@ -31,6 +32,7 @@ export async function POST(req, res) {
 
   return Response.json(res.rows);
 }
+*/
 
 export async function GET(req) {
   console.log("req");
