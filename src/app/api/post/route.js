@@ -36,10 +36,17 @@ export async function POST(req, res) {
 
 export async function GET(req) {
   console.log("req");
+  console.log(process.env.POSTGRES_HOST);
   let res = await client.query(
     `SELECT posts.title, posts.text, users.name, users.image, posts.date, posts.id FROM posts
     INNER JOIN users ON users.id = posts.user_id`
   );
+
   res = res.rows;
+  if(res){
   return Response.json(res);
+  }
+  else{
+    return Response.json({success: false});
+  }
 }
