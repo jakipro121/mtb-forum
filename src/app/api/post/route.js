@@ -4,11 +4,11 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getToken } from "next-auth/jwt";
 
 const config = {
-  user: "postgres",
-  host: "jfqdfeszwtevzwvrmuur.db.eu-central-1.nhost.run",
-  database: "jfqdfeszwtevzwvrmuur",
-  password: process.env.NHOST_PASS,
-  port: 5432,
+  user: process.env.POSTGRES_USER,
+  host: process.env.POSTGRES_HOST,
+  database: process.env.POSTGRES_DATABASE,
+  password: process.env.POSTGRES_PASSWORD,
+  port: process.env.POSTGRES_PORT,
 };
 const client = new Client(config);
 await client.connect();
