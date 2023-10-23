@@ -52,3 +52,11 @@
   border-color: var(--accent);
   background-color: var(--primary);
 }
+
+.userimg {
+  margin-left: 10px;
+  display: inline-block;
+  object-fit: cover;
+  border-radius: 50%;
+  image-rendering: optimizeSpeed;
+}

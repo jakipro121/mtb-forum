@@ -1,4 +1,4 @@
-import style from '@/app/css/post.module.css'
+import style from '@/css/post.module.css'
 
 export default function Post({children}) {
     return (

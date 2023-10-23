@@ -1,6 +1,11 @@
 import './globals.css'
 import { Roboto } from 'next/font/google'
 import Navbar from "@/components/navbar";
+
+import { useSelectedLayoutSegments } from 'next/navigation';
+import NextAuthProvider from '@/app/context/NextAuthProvider';
+
+
  
 const roboto = Roboto({
   weight: ['400', '100'],
@@ -18,8 +23,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={roboto.className}>
+        <NextAuthProvider>
         <Navbar />
         {children}
+        </NextAuthProvider>
       </body>
     </html>
   )

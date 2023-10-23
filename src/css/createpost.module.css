@@ -1,0 +1,19 @@
+.title {
+
+}
+
+.postcontent{
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-color: var(--secondary);
+    border-width: 2px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    resize: none;
+}
+
+.postcontent:focus{
+    outline: solid 2px var(--accent);
+}

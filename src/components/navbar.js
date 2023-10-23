@@ -1,8 +1,12 @@
+"use client";
+
 import Link from "next/link";
-import styles from "@/app/css/navbar.module.css";
+import styles from "@/css/navbar.module.css";
 import Image from "next/image";
+import { signIn, useSession } from "next-auth/react";
 
 export default function Navbar() {
+  const { data, status } = useSession();
   return (
     <nav className={styles.nav}>
       <div className={`${styles.logo} ${styles.left}`}>
@@ -19,6 +23,23 @@ export default function Navbar() {
           About
         </Link>
       </div>
+      {status === "authenticated" && (
+        <a href="/profile">
+          <p className="inline-block">{data.user.name}</p>
+          <Image
+            src={data.user.image}
+            width={35}
+            height={35}
+            alt="User image"
+            className={styles.userimg}
+          ></Image>
+        </a>
+      )}
+      {status != "authenticated" && (
+        <div>
+          <button onClick={() => signIn()} className="align-middle">Sign in</button>
+        </div>
+      )}
     </nav>
   );
 }

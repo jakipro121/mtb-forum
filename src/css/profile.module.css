@@ -1,0 +1,17 @@
+.card {
+  background-color: var(--secondary);
+  margin: 5rem;
+  padding: 2rem;
+}
+
+.card p {
+  margin: 10px;
+}
+
+.card span{
+    color: var(--accent);
+}
+
+.card button {
+  margin: 10px;
+}
