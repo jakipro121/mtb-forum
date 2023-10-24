@@ -5,7 +5,7 @@ import pstyle from "@/css/post.module.css";
 
 
 export async function getPosts(number) {
-  const res = await fetch(`http://${process.env.VERCEL_URL}/api/post/`, {
+  const res = await fetch(`https://${process.env.VERCEL_URL}/api/post/`, {
     method: "GET",
     cache: "no-store",
   });

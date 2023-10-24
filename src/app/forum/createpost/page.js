@@ -26,7 +26,7 @@ export default function Home() {
         title,
       });
       const res = fetch(
-        `http://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/post/`,
+        `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/post/`,
         {
           method: "POST",
           cache: "no-store",
