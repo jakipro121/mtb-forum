@@ -1,7 +1,10 @@
-import { Client } from "pg";
+import { Pool } from "pg";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getToken } from "next-auth/jwt";
+import { NextResponse } from "next/server";
+
+export const dynamic = "force-dynamic";
 
 const config = {
   user: process.env.POSTGRES_USER,
@@ -10,43 +13,45 @@ const config = {
   password: process.env.POSTGRES_PASSWORD,
   port: process.env.POSTGRES_PORT,
   ssl: true,
+  keepAlive: true,
+  keepAliveInitialDelayMillis: 10000,
 };
-const client = new Client(config);
-await client.connect();
+const pool = new Pool(config);
 
-/*
-export async function POST(req, res) {
+export async function POST(req) {
   const session = await getServerSession(authOptions);
-  const token = await getToken({ req });
-  console.log(token);
+  if (!session) {
+    return NextResponse.json({ success: "false" }, { status: 401 });
+  }
+  console.log(session);
+  const uid = session.user.uid;
 
   const data = await req.json();
-  const userName = token.name;
-  if (userName) {
-    res = await client.query(`SELECT users.id FROM users WHERE name = $1`, [
-      userName,
-    ]);
-  } else {
-    return Response.json({ status: "No user" });
+  console.log(data);
+  if (data.postText === "" || data.title === "") {
+    return Response.json({ success: "false" });
   }
-
-  return Response.json(res.rows);
+  const category = "";
+  const client = await pool.connect();
+  console.log(typeof uid)
+  let res = await client.query(`
+    INSERT INTO posts(title, text, user_id, date, category)
+    VALUES($1, $2, $3, current_timestamp, $4)`, [data.title, data.postText, Number(uid), category]);
+  await client.release();
+  return Response.json({ success: "true" });
 }
-*/
 
 export async function GET(req) {
-  console.log("req");
-  console.log(process.env.POSTGRES_HOST);
+  const client = await pool.connect();
   let res = await client.query(
     `SELECT posts.title, posts.text, users.name, users.image, posts.date, posts.id FROM posts
     INNER JOIN users ON users.id = posts.user_id`
   );
-
+  await client.release();
   res = res.rows;
-  if(res){
-  return Response.json(res);
-  }
-  else{
-    return Response.json({success: false});
+  if (res) {
+    return Response.json(res);
+  } else {
+    return Response.json({ success: false });
   }
 }

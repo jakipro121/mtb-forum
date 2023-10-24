@@ -1,4 +1,3 @@
-"use server";
 import Image from "next/image";
 import Post from "./post";
 import pstyle from "@/css/post.module.css";
