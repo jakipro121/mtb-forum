@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@auth/pg-adapter": "^0.2.2",
+    "@vercel/analytics": "^1.1.1",
     "autoprefixer": "10.4.15",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
