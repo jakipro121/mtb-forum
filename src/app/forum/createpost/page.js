@@ -2,11 +2,11 @@
 
 import styles from "@/css/forum.module.css";
 import poststyles from "@/css/createpost.module.css";
-import { useSession, getSession } from "next-auth/react"
+import { useSession } from "next-auth/react"
 
 export default function Home() {
 
-  const { data: session, status } = useSession()
+  const { status } = useSession()
 
   if (status === "loading") {
     return <p>Loading...</p>
@@ -25,8 +25,9 @@ export default function Home() {
         postText,
         title,
       });
+      const host = window.location.origin;
       const res = fetch(
-        `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/post/`,
+        `${host}/api/post/`,
         {
           method: "POST",
           cache: "no-store",
@@ -38,7 +39,7 @@ export default function Home() {
         }
       ).then((response) => {
         response.json().then((res) => {
-          console.log(res);
+          console.log({res});
           if (res.success === "true") {
             console.log("Uspjeh");
           }

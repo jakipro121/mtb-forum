@@ -1,23 +1,28 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Post from "./post";
 import pstyle from "@/css/post.module.css";
 
+export default function Posts() {
+  const [posts, setPosts] = useState(null);
 
-
-export async function getPosts(number) {
-  const res = await fetch(`https://${process.env.VERCEL_URL}/api/post/`, {
-    method: "GET",
-    cache: "no-store",
-  });
-  return res.json();
-}
-
-export default async function Posts() {
-  const posts = await getPosts();
+  useEffect(() => {
+    const host = window.location.origin;
+    fetch(`${host}/api/post/`, {
+      method: "GET",
+      cache: "no-store",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setPosts(data);
+      });
+  }, []);
   console.log(posts);
   return (
     <div key={"nesto"}>
-      {posts.map((post) => (
+      {posts && posts.map((post) => (
         <Post key={post.id}>
           <div>
             <Image
