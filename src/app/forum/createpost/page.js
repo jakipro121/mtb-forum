@@ -2,46 +2,43 @@
 
 import styles from "@/css/forum.module.css";
 import poststyles from "@/css/createpost.module.css";
-import { useSession } from "next-auth/react"
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-
-  const { status } = useSession()
+  const { push, refresh } = useRouter();
+  const { status } = useSession();
 
   if (status === "loading") {
-    return <p>Loading...</p>
+    return <p>Loading...</p>;
   }
 
   if (status === "unauthenticated") {
-    return <p>Access Denied</p>
+    return <p>Access Denied</p>;
   }
 
   function sendPost() {
     if (typeof window !== "undefined") {
       const postText = document.getElementById("postText").value;
       const title = document.getElementById("title").value;
-      console.log({ postText, title });
       const data = JSON.stringify({
         postText,
         title,
       });
       const host = window.location.origin;
-      const res = fetch(
-        `${host}/api/post/`,
-        {
-          method: "POST",
-          cache: "no-store",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: data,
-        }
-      ).then((response) => {
+      const res = fetch(`${host}/api/post/`, {
+        method: "POST",
+        cache: "no-store",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: data,
+      }).then((response) => {
         response.json().then((res) => {
-          console.log({res});
           if (res.success === "true") {
             console.log("Uspjeh");
+            push("/forum?reload=true");
           }
         });
       });

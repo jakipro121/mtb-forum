@@ -1,26 +1,18 @@
 "use client";
 
-import style from "@/css/post.module.css";
+import style from "@/css/comment.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
-import Image from "next/image";
 
-export default function Post({ children, post }) {
+export default function Comment({ children, post }) {
   const { data, status } = useSession();
   return (
-    <Link className={style.card} href={`/forum/post/${post.id}`}>
+    <div className={`${style.card}`}>
       <div>
-        <Image
-          src={post.image}
-          width={100}
-          height={100}
-          alt="profile picture"
-        />
+        <img src={post.image} width={100} height={100} alt="profile picture" />
         <h6>{post.name}</h6>
       </div>
-      <h2>{post.title}</h2>
       <p className={style.time}>
         {new Date(post.date).toLocaleString("hr", {
           year: "numeric",
@@ -31,15 +23,15 @@ export default function Post({ children, post }) {
         })}
       </p>
       <p>{post.text}</p>
-      {(data != null) ? (
+      {data != null ? (
         data.user.uid === String(post.uid) && (
-          <Link href={`/forum/post/${post.id}?remove=true`}>
+          <a href={`/forum/post/${post.id}?remove=true`}>
             <FontAwesomeIcon icon={faTrashCan} />
-          </Link>
+          </a>
         )
       ) : (
         <></>
       )}
-    </Link>
+    </div>
   );
 }
