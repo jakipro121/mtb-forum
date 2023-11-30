@@ -21,7 +21,7 @@ const pool = new Pool(config);
 //POST
 //------------------------------------------
 export async function POST(req) {
-  revalidateTag("getPosts");
+  
   const session = await getServerSession(authOptions);
   if (!session) {
     return NextResponse.json({ success: "false" }, { status: 401 });
@@ -32,13 +32,16 @@ export async function POST(req) {
   if (data.postText === "" || data.title === "") {
     return Response.json({ success: "false" });
   }
-  const category = "";
+  
+  const category = data.kategorije;
+  console.log(category);
   const client = await pool.connect();
   let res = await client.query(`
     INSERT INTO posts(title, text, user_id, date, category)
     VALUES($1, $2, $3, current_timestamp, $4)`, [data.title, data.postText, Number(uid), category]);
   await client.release();
   return Response.json({ success: "true" });
+  revalidateTag("getPosts");
 }
 //------------------------------------------
 //GET
@@ -52,6 +55,7 @@ export async function GET(req) {
   );
   await client.release();
   res = res.rows;
+  
   if (res) {
     return Response.json(res);
   } else {

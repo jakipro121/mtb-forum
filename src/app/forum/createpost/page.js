@@ -1,12 +1,15 @@
 "use client";
 
+import { useRef, useState } from "react";
 import styles from "@/css/forum.module.css";
 import poststyles from "@/css/createpost.module.css";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const { push, refresh } = useRouter();
+  const [visible, setVisible] = useState(false);
+
+  const { push } = useRouter();
   const { status } = useSession();
 
   if (status === "loading") {
@@ -19,12 +22,22 @@ export default function Home() {
 
   function sendPost() {
     if (typeof window !== "undefined") {
+      let kategorijeElements = document.querySelectorAll("#kategorije li input");
+      let kategorije = [];
+      kategorijeElements.forEach(element => {
+        if(element.checked){
+          kategorije.push(element.name);
+        }
+      });
+
       const postText = document.getElementById("postText").value;
       const title = document.getElementById("title").value;
       const data = JSON.stringify({
         postText,
         title,
+        kategorije
       });
+      console.log(data);
       const host = window.location.origin;
       const res = fetch(`${host}/api/post/`, {
         method: "POST",
@@ -54,6 +67,51 @@ export default function Home() {
           className={poststyles.postcontent}
           placeholder="Text"
         />
+        <div
+          className={(visible ? styles.visible : "") + " " + styles.kategorije}
+        >
+          <span
+            className={styles.anchor}
+            onClick={() => {
+              setVisible((current) => !current);
+            }}
+            onBlur={() => {
+              setVisible(false);
+            }}
+          >
+            Izaberi kategorije
+          </span>
+          <ul className={`${styles.items}`} id="kategorije">
+            <li>
+              <input type="checkbox" value="mtb" name="mtb" id="mtb" />
+              <label htmlFor="mtb">MTB</label>
+            </li>
+            <li>
+              <input type="checkbox" value="dh" name="dh" id="dh" />
+              <label htmlFor="dh">DH</label>
+            </li>
+            <li>
+              <input type="checkbox" value="enduro" name="enduro" id="enduro" />
+              <label htmlFor="enduro">Enduro</label>
+            </li>
+            <li>
+              <input type="checkbox" value="xc" name="xc" id="xc" />
+              <label htmlFor="xc">XC</label>
+            </li>
+            <li>
+              <input type="checkbox" value="trail" name="trail" id="trail" />
+              <label htmlFor="trail">Trail</label>
+            </li>
+            <li>
+              <input type="checkbox" value="road" name="road" id="road" />
+              <label htmlFor="road">Road</label>
+            </li>
+            <li>
+              <input type="checkbox" value="staze" name="staze" id="staze" />
+              <label htmlFor="staze">Staze</label>
+            </li>
+          </ul>
+        </div>
         <button onClick={() => sendPost()}>Send</button>
       </div>
     </main>
