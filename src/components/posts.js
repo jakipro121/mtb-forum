@@ -5,7 +5,7 @@ import Post from "./post";
 async function getPosts(category) {
   console.log(category);
   var url = `/`;
-  if(category){
+  if (category) {
     url = `/category/${category}`;
   }
   const res = await fetch(
@@ -19,10 +19,14 @@ async function getPosts(category) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
   }
-  return res.json();
+  try {
+    return res.json();
+  } catch (e) {
+    return false;
+  }
 }
 
-export default async function Posts({category}) {
+export default async function Posts({ category }) {
   //const [posts, setPosts] = useState(null);
   var posts = await getPosts(category);
   return (

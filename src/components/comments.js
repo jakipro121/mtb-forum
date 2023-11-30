@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import Comment from "./Comment";
 
@@ -15,9 +15,13 @@ async function getComments(id) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
   }
-
-  const data = await res.json();
-  return data.comments;
+  try {
+    const data = await res.json();
+    return data.comments;
+  } catch (e) {
+    const data = false;
+    return data;
+  }
 }
 
 export default async function Comments({ children, postId }) {
@@ -27,9 +31,7 @@ export default async function Comments({ children, postId }) {
     return (
       <div>
         {comments.map((comment) => {
-          return (
-            <Comment key={comment.id} post={comment}></Comment>
-          );
+          return <Comment key={comment.id} post={comment}></Comment>;
         })}
       </div>
     );
