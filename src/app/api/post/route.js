@@ -40,8 +40,9 @@ export async function POST(req) {
     INSERT INTO posts(title, text, user_id, date, category)
     VALUES($1, $2, $3, current_timestamp, $4)`, [data.title, data.postText, Number(uid), category]);
   await client.release();
-  return Response.json({ success: "true" });
   revalidateTag("getPosts");
+  return Response.json({ success: "true" });
+  
 }
 //------------------------------------------
 //GET
