@@ -20,7 +20,9 @@ async function getPosts(category) {
     throw new Error("Failed to fetch data");
   }
   try {
-    return res.json();
+    let a = await res.json();
+    console.log(a);
+    return a
   } catch (e) {
     return false;
   }
