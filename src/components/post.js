@@ -8,7 +8,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Post({ children, post }) {
-  const { data, status } = useSession();
+  const { data } = useSession();
   return (
     <Link className={style.card} href={`/forum/post/${post.id}`}>
       <div>

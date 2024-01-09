@@ -62,7 +62,6 @@ export async function POST(req, { params }) {
   if (!data.comment) {
     return Response.json({ success: "false" });
   }
-  const category = "";
   const client = await pool.connect();
   const comment = data.comment;
   const postId = params.ID;
@@ -74,5 +73,47 @@ export async function POST(req, { params }) {
     [uid, postId, comment]
   );
   await client.release();
+  return Response.json({ success: "true" });
+}
+//------------------------------------------
+//DELETE
+//------------------------------------------
+export async function DELETE(req, { params }) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return Response.json({ success: "false" }, { status: 401 });
+  }
+  
+  const uid = session.user.uid;
+  const postID = params.ID;
+  const data = await req.json();
+  console.log(data);
+  const post = data.type;
+
+
+  const client = await pool.connect();
+  if(post === 'comments'){
+    let res = await client.query(
+      `
+    DELETE FROM comments
+    WHERE posts.user_id = $1 AND posts.id = $2
+    `,
+      [uid, postID]
+    );
+  }
+  else if(post === 'posts'){
+    let res = await client.query(
+      `
+    DELETE FROM posts
+    WHERE posts.user_id = $1 AND posts.id = $2
+    `,
+      [uid, postID]
+    );
+  }
+  else {
+    return Response.json({ success: "false" }, { status: 400 });
+  }
+  revalidateTag("getComments");
+
   return Response.json({ success: "true" });
 }

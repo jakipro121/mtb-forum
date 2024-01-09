@@ -4,7 +4,7 @@ import styles from "@/css/forum.module.css";
 import Post from "@/components/post";
 import Comments from "@/components/comments";
 import CreateComment from "@/components/CreateComment";
-import Modal from "@/components/removePost";
+import RemovePostModal from "@/components/removePost";
 
 async function getPost(id) {
   const res = await fetch(
@@ -30,15 +30,11 @@ export default async function PostID({ params }) {
   if (post) {
     return (
       <div className={styles.main}>
-        <Modal></Modal>
+        <RemovePostModal postId={params.ID} type='posts'></RemovePostModal>
         <Post key={post.id} post={post} />
         <CreateComment id={post.id}></CreateComment>
         <Comments postId={params.ID}></Comments>
       </div>
     );
-  } else if (!success) {
-    return <p>Error: not found</p>;
-  } else {
-    return <p>Loading...</p>;
   }
 }

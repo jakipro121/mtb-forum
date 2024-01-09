@@ -1,0 +1,45 @@
+.modal {
+  width: 20rem;
+  height: 18rem;
+  position: fixed;
+  top: 50%;
+  bottom: 50%;
+  left: 50%;
+  right: 50%;
+  padding: 1rem;
+  margin-left: -10rem;
+  margin-right: -10rem;
+  margin-top: -9rem;
+  margin-bottom: -9rem;
+  background-color: var(--primary);
+  border-color: var(--accent);
+  border-width: 2px;
+  box-shadow: 0 0 100vw 100vw rgba(0, 0, 0, 0.541);
+  z-index: 1;
+  animation: modal;
+  animation-duration: 1s;
+}
+
+
+.button{
+  border-width: 2px;
+  border-radius: 5px;
+  border-color: var(--accent);
+  padding: 1rem;
+  color: var(--text);
+  
+}
+
+
+@keyframes modal {
+  0% {
+    top: 0px;
+    box-shadow: 0 0 0vw 0vw rgba(0, 0, 0, 0.541);
+  }
+  50% {
+    top: 50%;
+  }
+  100% {
+    box-shadow: 0 0 100vw 100vw rgba(0, 0, 0, 0.541);
+  }
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import styles from "@/css/forum.module.css";
 import poststyles from "@/css/createpost.module.css";
 import { useSession } from "next-auth/react";

@@ -6,6 +6,7 @@ import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 config.autoAddCss = false
 import NextAuthProvider from "@/app/context/NextAuthProvider";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const roboto = Roboto({
   weight: ["400", "100"],
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={roboto.className}>
+        <SpeedInsights />
         <NextAuthProvider>
           <Navbar />
           {children}

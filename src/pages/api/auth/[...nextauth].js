@@ -4,6 +4,7 @@ import StravaProvider from "next-auth/providers/strava";
 import GoogleProvider from "next-auth/providers/google";
 import PostgresAdapter from "@auth/pg-adapter";
 import { Pool } from "pg";
+import Email from "next-auth/providers/email";
 
 const config = {
   user: process.env.POSTGRES_USER,
@@ -17,10 +18,22 @@ const config = {
 const pool = new Pool(config);
 
 export const authOptions = {
+  debug: true,
   adapter: PostgresAdapter(pool),
   secret: process.env.NEXTAUTH_SECRET,
   // Configure one or more authentication providers
   providers: [
+    Email({
+      server: {
+        host: process.env.EMAIL_SERVER_HOST,
+        port: process.env.EMAIL_SERVER_PORT,
+        auth: {
+          user: process.env.EMAIL_SERVER_USER,
+          pass: process.env.EMAIL_SERVER_PASSWORD
+        }
+      },
+      from: process.env.EMAIL_FROM
+    }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
