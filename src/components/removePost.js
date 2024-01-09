@@ -14,7 +14,7 @@ export default function RemovePostModal(props) {
       type,
     })
     let res = fetch(
-      `http://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/post/${props.postId}`,
+      `${process.env.NEXT_PUBLIC_PROTOCOL}://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/post/${props.postId}`,
       {
         method: "DELETE",
         credentials: "include",
@@ -27,7 +27,7 @@ export default function RemovePostModal(props) {
       res.json().then((data)=>{
         console.log(data);
         if(data.success){
-          router.push(`http://${process.env.NEXT_PUBLIC_VERCEL_URL}/forum`);
+          router.push(`${process.env.NEXT_PUBLIC_PROTOCOL}://${process.env.NEXT_PUBLIC_VERCEL_URL}/forum`);
         }
       })
     });
