@@ -24,6 +24,7 @@ export default function Home({ children }) {
           <a href={"/forum/category/road/commute"}>Commute</a>
           <a href={"/forum/category/road/staze"}>Staze</a>
         </div>
+        <a href={"/forum/category/marketplace"}>Oglasnik</a>
       </div>
       {children}
     </div>

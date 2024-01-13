@@ -104,11 +104,15 @@ export default function Home() {
             </li>
             <li>
               <input type="checkbox" value="road" name="road" id="road" />
-              <label htmlFor="road">Road</label>
+              <label htmlFor="road">cesta</label>
             </li>
             <li>
               <input type="checkbox" value="staze" name="staze" id="staze" />
               <label htmlFor="staze">Staze</label>
+            </li>
+            <li>
+              <input type="checkbox" value="marketplace" name="marketplace" id="marketplace" />
+              <label htmlFor="marketplace">oglasnik</label>
             </li>
           </ul>
         </div>

@@ -33,10 +33,16 @@ export default function RemovePostModal(props) {
     });
   }
   function closeModal() {
+    if(props.type == "comments"){
+    props.setDel(false);
+    }
     router.replace(pathname);
   }
   const searchParams = useSearchParams();
-  const remove = searchParams.get("remove");
+  let remove = searchParams.get("remove");
+  console.log({remove});
+  remove = remove || props.remove;
+  console.log(`remove: ${remove}`);
   if (remove) {
     return (
       <div className={`${styles.modal}`}>

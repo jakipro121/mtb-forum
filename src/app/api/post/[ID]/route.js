@@ -96,7 +96,7 @@ export async function DELETE(req, { params }) {
     let res = await client.query(
       `
     DELETE FROM comments
-    WHERE posts.user_id = $1 AND posts.id = $2
+    WHERE comments.user_id = $1 AND comments.id = $2
     `,
       [uid, postID]
     );

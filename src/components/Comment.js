@@ -4,8 +4,14 @@ import style from "@/css/comment.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { useSession } from "next-auth/react";
+import { useState } from "react";
+import RemovePostModal from "./removePost";
 
 export default function Comment({ children, post }) {
+  const [del, setDel] = useState(false);
+  function deletePost() {
+    setDel(true);
+  }
   const { data, status } = useSession();
   return (
     <div className={`${style.card}`}>
@@ -25,9 +31,19 @@ export default function Comment({ children, post }) {
       <p>{post.text}</p>
       {data != null ? (
         data.user.uid === String(post.uid) && (
-          <a href={`/forum/post/${post.id}?remove=true`}>
-            <FontAwesomeIcon icon={faTrashCan} />
-          </a>
+          <>
+            <button onClick={deletePost}>
+              <FontAwesomeIcon icon={faTrashCan} />
+            </button>
+            {del && (
+              <RemovePostModal
+                type="comments"
+                postId={post.id}
+                remove={true}
+                setDel={setDel}
+              ></RemovePostModal>
+            )}
+          </>
         )
       ) : (
         <></>
