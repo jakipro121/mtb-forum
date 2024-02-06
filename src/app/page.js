@@ -18,7 +18,7 @@ export default function Home() {
           </p>
           <Image src={"/golden-orbea.png"} width={400} height={400} alt="" />
         </Link>
-        <Link href="/marketplace">
+        <Link href="/forum/category/marketplace">
           <p>
             Tražiš <span className={styles.pitanje}>bicikl?</span> Pogledaj naš{" "}
             <span>oglasnik!</span>
