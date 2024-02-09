@@ -17,7 +17,7 @@ export default function Home() {
   }
 
   if (status === "unauthenticated") {
-    return <p>Access Denied</p>;
+    return <p>You must be signed in to create posts</p>;
   }
 
   function sendPost() {
