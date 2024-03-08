@@ -1,8 +1,13 @@
-#Forum
+# Forum
 
-to run development build run 
-`npm run dev`
-to build run
-`npm run build`
-to run for production run
-`npm start`
+Za pokrenuti development build treba napisati u komandnu liniju u direktoriju u kojem se nalazi kod sljedeće komande:
+```
+npm install
+npm run dev
+```  
+Za pokrenuti normalnu verziju treba napisati u komandnu liniju u direktoriju u kojem se nalazi kod sljedeće komande:
+```
+npm install
+npm run build
+npm start
+```
